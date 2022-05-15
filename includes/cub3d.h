@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:19:08 by gucamuze          #+#    #+#             */
-/*   Updated: 2022/05/14 19:10:53 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/15 17:39:18 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 # define W_LEN 1920
 # define W_HGHT 1080
+# define MMAP_STRT 50
 
 typedef struct	s_img {
 	void	*img_ptr;
@@ -37,27 +38,31 @@ typedef struct s_mlx
 
 // UI START //
 // ui
-void		*init_failure(t_mlx *mlx, int mode);
-t_mlx		*init_ui();
+void			*init_failure(t_mlx *mlx, int mode);
+t_mlx			*init_ui();
+void			add_minimap(t_mlx *mlx);
 // hooks
-int			keyboard_hook(int keycode, t_mlx *mlx);
-int			mouse_hook(int button, int x, int y, t_mlx *mlx);
+int				keyboard_hook(int keycode, t_mlx *mlx);
+int				mouse_hook(int button, int x, int y, t_mlx *mlx);
+int				mouse_move_hook(int x, int y, t_mlx *mlx);
+int				close_hook(t_mlx *mlx);
 // UI END //
 
 // ENGINE START //
 // engine
-void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
+unsigned int	init_img(t_mlx *mlx);
 // colors
-int			create_trgb(int t, int r, int g, int b);
-int			get_t(int trgb);
-int			get_r(int trgb);
-int			get_g(int trgb);
-int			get_b(int trgb);
+int				create_trgb(int t, int r, int g, int b);
+int				get_t(int trgb);
+int				get_r(int trgb);
+int				get_g(int trgb);
+int				get_b(int trgb);
 // ENGINE END //
 
 // TBD START //
 // cleanup
-void		cleanup(t_mlx *mlx);
+void			cleanup(t_mlx *mlx);
 
 // TBD END //
 

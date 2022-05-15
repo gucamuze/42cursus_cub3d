@@ -6,7 +6,7 @@
 #    By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/15 02:21:09 by gucamuze          #+#    #+#              #
-#    Updated: 2022/05/14 19:00:10 by gucamuze         ###   ########.fr        #
+#    Updated: 2022/05/15 17:00:24 by gucamuze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,12 @@ $(LIBFT_A):
 				make --directory=libft
 
 OFILES:			${SRC_OFILES} ${ENGINE_OFILES} ${UI_OFILES}
+				
+noflags:		CC = clang -g
+noflags:		all
+
+fsanitize:		CC = clang -Wall -Wextra -Werror -fsanitize=address -g
+fsanitize:		all
 				
 clean:
 				make clean --directory=libft
