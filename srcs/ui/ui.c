@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:17:31 by gucamuze          #+#    #+#             */
-/*   Updated: 2022/05/15 17:49:23 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/17 15:39:04 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,25 +58,23 @@ void	add_minimap(t_mlx *mlx)
 		{'1','0','1','0','0','1', 0},
 		{'1','1','0','0','2','1', 0},
 		{'1','1','1','1','1','1', 0}, 
-		{0}
+		{0, 0 , 0, 0, 0 ,0 ,0}
 	};
 
-	x = 0;
 	y = 0;
 	(void)mlx;
-	while (map[y])
+	while (map[y][0] != 0)
 	{
-		while (map[y][x])
+		x = 0;
+		while (map[y][x] != 0)
 		{
 			if (map[y][x] == '1')
 			{
 				if (map[y][x + 1] && map[y][x + 1] == '1')
-				;
-					// minimap_draw_line(mlx, x, y, 0);
+					minimap_draw_line(mlx, x, y, 0);
 				if (map[y + 1][x] && map[y + 1][x] == '1')
-				;
-					// minimap_draw_line(mlx, x, y, 1);
-				printf("1");
+					minimap_draw_line(mlx, x, y, 1);
+				// printf("1");
 			}
 			x++;
 		}

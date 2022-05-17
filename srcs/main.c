@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:25:57 by gucamuze          #+#    #+#             */
-/*   Updated: 2022/05/15 17:43:12 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/17 15:39:33 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(int ac, char **av)
 	init_img(mlx);
 	add_minimap(mlx);
 	mlx_put_image_to_window(mlx->ptr, mlx->window, mlx->img.img_ptr, 0, 0);
+	mlx_loop(mlx->ptr);
 	cleanup(mlx);
 	return (0);
 }
