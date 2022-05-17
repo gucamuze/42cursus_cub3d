@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:19:08 by gucamuze          #+#    #+#             */
-/*   Updated: 2022/05/15 17:39:18 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/17 16:24:45 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 
 # include "libft.h"
 # include "mlx.h"
+# include "parsing.h"
 # include <math.h>
 
 # define W_LEN 1920
 # define W_HGHT 1080
-# define MMAP_STRT 50
+# define MMAP_STRT 20
 
 typedef struct	s_img {
 	void	*img_ptr;
@@ -65,5 +66,9 @@ int				get_b(int trgb);
 void			cleanup(t_mlx *mlx);
 
 // TBD END //
+
+// GNL
+# define BUFFER_SIZE 250
+char			*get_next_line(int fd);
 
 #endif
