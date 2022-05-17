@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:25:57 by gucamuze          #+#    #+#             */
-/*   Updated: 2022/05/17 15:39:33 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/17 18:01:27 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@ unsigned int	init_img(t_mlx *mlx)
 
 int	main(int ac, char **av)
 {
+	t_scene	*scene;
 	t_mlx	*mlx;
 
-	(void)ac;
-	(void)av;
 	mlx = init_ui();
+	scene = malloc(sizeof(t_scene));
 	if (!mlx)
 		return (1);
+	if (parsing(ac, av, scene))
+		printf("parsing ok");
 	init_img(mlx);
 	add_minimap(mlx);
 	mlx_put_image_to_window(mlx->ptr, mlx->window, mlx->img.img_ptr, 0, 0);
