@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 10:10:33 by malbrand          #+#    #+#             */
-/*   Updated: 2022/05/18 12:54:36 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/18 14:39:11 by malbrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_image
 typedef struct s_textures
 {
 	t_image	image[4];
+	char	*addr[4];
 	char	paths[4][300];
 	int		sky_color;
 	int		ground_color;
