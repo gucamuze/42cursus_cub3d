@@ -6,13 +6,20 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 02:28:38 by malbrand          #+#    #+#             */
-/*   Updated: 2022/05/17 18:29:22 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/18 11:21:28 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_check(const char *str)
+static char	*ft_error(char *str, int fd)
+{
+	if (fd < 0 && str != NULL)
+		free(str);
+	return (NULL);
+}
+
+static int	ft_check(const char *str)
 {
 	int		i;
 
@@ -28,7 +35,7 @@ int	ft_check(const char *str)
 	return (0);
 }
 
-char	*ft_fill_line(char **str, char *line)
+static char	*ft_fill_line(char **str, char *line)
 {
 	char	*tmp;
 
@@ -40,21 +47,21 @@ char	*ft_fill_line(char **str, char *line)
 	}
 	if (ft_check(*str) == 0 && *str[ft_check(*str)] != '\n')
 	{
-		line = ft_strdup(*str);
+		line = gnl_strdup(*str);
 		free(*str);
 		*str = NULL;
 	}
 	else
 	{
-		line = ft_substr(*str, 0, (ft_check(*str) + 1));
+		line = gnl_substr(*str, 0, (ft_check(*str) + 1));
 		tmp = *str;
-		*str = ft_strdup(*str + (ft_check(*str) + 1));
+		*str = gnl_strdup(*str + (ft_check(*str) + 1));
 		free(tmp);
 	}
 	return (line);
 }
 
-int	ft_read(int *ret, int fd, char **buff)
+static int	ft_read(int *ret, int fd, char **buff)
 {
 	*ret = read(fd, *buff, BUFFER_SIZE);
 	if (*ret == 0)
@@ -75,18 +82,17 @@ char	*get_next_line(int fd)
 	int			ret;
 
 	line = NULL;
-	printf("gnl\n");
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
+		return (ft_error(str, fd));
 	buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
-		return (NULL);
-	while (!(ft_strchr(str, '\n')) && (ft_read(&ret, fd, &buff)))
+		return (ft_error(str, -1));
+	while (!(gnl_strchr(str, '\n')) && (ft_read(&ret, fd, &buff)))
 	{
 		if (ret == -1)
 			return (NULL);
 		buff[ret] = '\0';
-		str = ft_strjoin(str, buff);
+		str = gnl_strjoin(str, buff);
 	}
 	free(buff);
 	line = ft_fill_line(&str, line);

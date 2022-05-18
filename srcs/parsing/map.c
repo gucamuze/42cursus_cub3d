@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 11:37:44 by malbrand          #+#    #+#             */
-/*   Updated: 2022/05/17 16:25:34 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/18 11:21:34 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	free_tab(t_scene *scene, int i)
 		line++;
 	}
 	free(scene->map.map);
+	scene->map.map = NULL;
 }
 
 int	malloc_line(int *size, int *j, t_scene *scene, int i)

@@ -6,7 +6,7 @@
 #    By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/15 02:21:09 by gucamuze          #+#    #+#              #
-#    Updated: 2022/05/17 16:27:24 by gucamuze         ###   ########.fr        #
+#    Updated: 2022/05/18 11:28:48 by gucamuze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,10 +22,11 @@ UI_FILES_PATH		=	./srcs/ui/
 
 LIBFT_PATH			=	./libft/
 LIBFT_A				=	./libft/libft.a
+MINILIBX_A			=	./minilibx-linux/libmlx_Linux.a
 INCLUDES			=	 -Iminilibx-linux -Lminilibx-linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz $(LIBFT_A)
 			
 PARSING_FILES		=	parsing.c color.c create_map.c error_map.c loop_info.c map.c \
-						path_textures.c gnl.c fill_map.c 
+						path_textures.c gnl.c gnl_utils.c fill_map.c 
 PARSING_PATH		=	$(addprefix ${PARSING_FILES_PATH}, ${PARSING_FILES})
 PARSING_OFILES		=	$(PARSING_PATH:.c=.o)
 ALL_OFILES			+=	$(PARSING_OFILES)
@@ -50,11 +51,14 @@ ALL_OFILES			+=	$(SRC_OFILES)
 
 all:			${EXEC_NAME}
 
-$(EXEC_NAME):	$(LIBFT_A) OFILES
+$(EXEC_NAME):	$(LIBFT_A) $(MINILIBX_A) OFILES
 				$(CC) $(ALL_OFILES) $(INCLUDES) -o $(EXEC_NAME)
 
 $(LIBFT_A):
 				make --directory=libft
+
+$(MINILIBX_A):
+				make --directory=minilibx-linux
 
 OFILES:			${SRC_OFILES} ${ENGINE_OFILES} ${UI_OFILES} ${PARSING_OFILES}
 				
@@ -66,10 +70,11 @@ fsanitize:		all
 				
 clean:
 				make clean --directory=libft
+				make clean --directory=minilibx-linux
 				$(RM) $(ALL_OFILES)
 
 fclean:		clean
-				$(RM) $(LIBFT_A) ${EXEC_NAME}
+				$(RM) $(LIBFT_A) $(MINILIBX_A) ${EXEC_NAME}
 
 re:			fclean all
 

@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 10:12:34 by malbrand          #+#    #+#             */
-/*   Updated: 2022/05/17 16:24:16 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/18 11:21:41 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,7 @@ static int	print_error(int er)
 	else if (er == 2)
 		printf("Error\nThe file is not correct\n");
 	else if (er == 3)
-	{
 		printf("Error\nInvalid map\n");
-	}
 	else if (er == 4)
 		printf("Error\nInvalid map_bis\n");
 	return (0);

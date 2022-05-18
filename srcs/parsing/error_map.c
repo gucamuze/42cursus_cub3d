@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 11:40:43 by malbrand          #+#    #+#             */
-/*   Updated: 2022/05/17 16:26:05 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/18 11:21:19 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ static int	check_error(int i, t_scene *scene, int *line, int col)
 		{
 			if (scene->map.map[i][j + 1] == 42
 				|| scene->map.map[i][j + 1] == 10)
+			{
+				free_tab(scene, (*line));
+				return (0);
+			}
+			if (i == 0 && scene->map.map[i][j] == 0)
 			{
 				free_tab(scene, (*line));
 				return (0);

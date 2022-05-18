@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:19:08 by gucamuze          #+#    #+#             */
-/*   Updated: 2022/05/17 16:24:45 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/18 11:23:27 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,11 @@ void			cleanup(t_mlx *mlx);
 // GNL
 # define BUFFER_SIZE 250
 char			*get_next_line(int fd);
+// gnl utils
+char			*gnl_strjoin(char *s1, const char *s2);
+char			*gnl_strchr(const char *s, int c);
+char			*gnl_substr(const char *s, unsigned int start, size_t len);
+char			*gnl_strdup(const char *s);
+size_t			gnl_strlen(const char *s);
 
 #endif

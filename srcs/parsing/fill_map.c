@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 12:31:19 by malbrand          #+#    #+#             */
-/*   Updated: 2022/05/17 16:24:07 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/18 11:21:22 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	fill_line(t_scene *scene, char *str, int i, int j)
 		scene->map.map[i][j] = 1;
 	else if (str[j] == '0')
 		scene->map.map[i][j] = 0;
-	else if (str[j] == 'N' || str[j] == 'S' || str[j] == 'S' || str[j] == 'O')
+	else if (str[j] == 'N' || str[j] == 'S' || str[j] == 'E' || str[j] == 'W')
 	{
 		if (scene->map.hero != -1)
 		{
@@ -105,6 +105,8 @@ int	fill_map(t_scene *scene, int *line, int fd)
 		str = get_next_line(fd);
 		i++;
 	}
+	if (scene->map.hero == -1)
+		return (0);
 	scene->map.map[i] = NULL;
 	return (1);
 }
