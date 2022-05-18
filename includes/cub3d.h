@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:19:08 by gucamuze          #+#    #+#             */
-/*   Updated: 2022/05/18 12:47:52 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/18 13:44:11 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_data
 	void	*mlx_ptr;
 	void	*window;
 	t_img	img;
+	t_scene	*scene;
 }				t_data;
 
 // UI START //

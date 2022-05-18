@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:17:31 by gucamuze          #+#    #+#             */
-/*   Updated: 2022/05/18 12:50:01 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/18 14:23:32 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,29 @@ void	*return_failure(t_data *data, int mode)
 	return (NULL);
 }
 
-// 0 for horizontal, 1 for vertical
-void	minimap_draw_line(t_data *data, int x, int y, int mode)
+// 0 for walls, 1 for hero
+void	minimap_draw(t_data *data, int x, int y, int mode)
 {
-	int	i;
 	int draw_x;
 	int	draw_y;
+	int	i;
+	int j;
+	int	size_of_walls;
 
-	i = 10;
-	draw_x = MMAP_STRT + (x * 10);
-	draw_y = MMAP_STRT + (y * 10);
-	while (i--)
+	i = 0;
+	size_of_walls = 10;
+	draw_x = MMAP_STRT + (x * size_of_walls);
+	draw_y = MMAP_STRT + (y * size_of_walls);
+	while (i++ < size_of_walls)
 	{
-		my_mlx_pixel_put(&data->img, draw_x, draw_y, 0x00FFFFFF);
-		if (mode)
-			draw_y++;
-		else
-			draw_x++;
+		j = 0;
+		while (j++ < size_of_walls)
+		{
+			if (mode == 0)
+				my_mlx_pixel_put(&data->img, draw_x + i, draw_y + j, 0x00FFFFFF);
+			else
+				my_mlx_pixel_put(&data->img, draw_x + i, draw_y + j, 0x00FFFF00);
+		}
 	}
 }
 
@@ -52,29 +58,19 @@ void	add_minimap(t_data *data)
 {
 	int	x;
 	int	y;
-	char map[6][7] = {
-		{'1','1','1','1','1','1', 0},
-		{'0','1','0','1','0','1', 0},
-		{'1','0','1','0','0','1', 0},
-		{'1','1','0','0','2','1', 0},
-		{'1','1','1','1','1','1', 0}, 
-		{0, 0 , 0, 0, 0 ,0 ,0}
-	};
+	int **map;
 
 	y = 0;
-	while (map[y][0] != 0)
+	map = data->scene->map.map;
+	while (y < data->scene->map.height)
 	{
 		x = 0;
-		while (map[y][x] != 0)
+		while (x < data->scene->map.width)
 		{
-			if (map[y][x] == '1')
-			{
-				if (map[y][x + 1] && map[y][x + 1] == '1')
-					minimap_draw_line(data, x, y, 0);
-				if (map[y + 1][x] && map[y + 1][x] == '1')
-					minimap_draw_line(data, x, y, 1);
-				// printf("1");
-			}
+			if (map[y][x] == 1)
+				minimap_draw(data, x, y, 0);
+			else if (map[y][x] == 2)
+				minimap_draw(data, x, y, 1);
 			x++;
 		}
 		y++;

@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:25:57 by gucamuze          #+#    #+#             */
-/*   Updated: 2022/05/18 12:51:20 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/18 13:44:39 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(int ac, char **av)
 	if (!data)
 		return (1);
 	init_img(data);
+	data->scene = scene;
 	add_minimap(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->window, data->img.img_ptr, 0, 0);
 	mlx_loop(data->mlx_ptr);
