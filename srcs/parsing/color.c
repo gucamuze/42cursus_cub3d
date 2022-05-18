@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:58:15 by malbrand          #+#    #+#             */
-/*   Updated: 2022/05/18 11:21:08 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/18 12:53:17 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,10 @@ int	parsing_color(char *str, t_scene *scene)
 		return (-1);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 		return (-1);
-	if (str[0] == 'C' && scene->mlx.sky_color == -1)
-		scene->mlx.sky_color = create_trgb(0, r, g, b);
-	else if (str[0] == 'F' && scene->mlx.ground_color == -1)
-		scene->mlx.ground_color = create_trgb(0, r, g, b);
+	if (str[0] == 'C' && scene->textures.sky_color == -1)
+		scene->textures.sky_color = create_trgb(0, r, g, b);
+	else if (str[0] == 'F' && scene->textures.ground_color == -1)
+		scene->textures.ground_color = create_trgb(0, r, g, b);
 	else
 		return (-1);
 	return (1);

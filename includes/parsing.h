@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 10:10:33 by malbrand          #+#    #+#             */
-/*   Updated: 2022/05/17 16:21:16 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/18 12:54:36 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,15 @@ typedef struct s_image
 
 typedef struct s_textures
 {
-	t_image	textures[4];
-	char	textures_paths[4][300];
+	t_image	image[4];
+	char	paths[4][300];
 	int		sky_color;
 	int		ground_color;
 }		t_textures;
 
 typedef struct s_scene
 {
-	t_textures	mlx;
+	t_textures	textures;
 	t_map		map;
 }			t_scene;
 
@@ -59,10 +59,5 @@ int		malloc_line(int *size, int *j, t_scene *scene, int i);
 int		check_texture(int fd, t_scene *scene, int line, char *s);
 
 void	free_tab(t_scene *scene, int i);
-
-// a enlever 
-int	create_trgb(int t, int r, int g, int b);
-int	ft_atoi(char const *s);
-// a enlever 
 
 #endif

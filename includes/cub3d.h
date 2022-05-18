@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:19:08 by gucamuze          #+#    #+#             */
-/*   Updated: 2022/05/18 11:23:27 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/18 12:47:52 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,29 @@ typedef struct	s_img {
 	int		endian;
 }				t_img;
 
-typedef struct s_mlx
+typedef struct s_data
 {
-	void	*ptr;
+	void	*mlx_ptr;
 	void	*window;
 	t_img	img;
-}				t_mlx;
+}				t_data;
 
 // UI START //
 // ui
-void			*init_failure(t_mlx *mlx, int mode);
-t_mlx			*init_ui();
-void			add_minimap(t_mlx *mlx);
+void			*init_failure(t_data *mlx, int mode);
+t_data			*init_ui();
+void			add_minimap(t_data *mlx);
 // hooks
-int				keyboard_hook(int keycode, t_mlx *mlx);
-int				mouse_hook(int button, int x, int y, t_mlx *mlx);
-int				mouse_move_hook(int x, int y, t_mlx *mlx);
-int				close_hook(t_mlx *mlx);
+int				keyboard_hook(int keycode, t_data *mlx);
+int				mouse_hook(int button, int x, int y, t_data *mlx);
+int				mouse_move_hook(int x, int y, t_data *mlx);
+int				close_hook(t_data *mlx);
 // UI END //
 
 // ENGINE START //
 // engine
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
-unsigned int	init_img(t_mlx *mlx);
+unsigned int	init_img(t_data *mlx);
 // colors
 int				create_trgb(int t, int r, int g, int b);
 int				get_t(int trgb);
@@ -63,7 +63,7 @@ int				get_b(int trgb);
 
 // TBD START //
 // cleanup
-void			cleanup(t_mlx *mlx);
+void			cleanup(t_data *mlx);
 
 // TBD END //
 

@@ -6,36 +6,36 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:25:57 by gucamuze          #+#    #+#             */
-/*   Updated: 2022/05/17 18:25:49 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/18 12:51:20 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-unsigned int	init_img(t_mlx *mlx)
+unsigned int	init_img(t_data *data)
 {
-	mlx->img.img_ptr = mlx_new_image(mlx->ptr, W_LEN, W_HGHT);
-	mlx->img.addr = mlx_get_data_addr(mlx->img.img_ptr, &mlx->img.bits_per_pixel, 
-		&mlx->img.line_length, &mlx->img.endian);
+	data->img.img_ptr = mlx_new_image(data->mlx_ptr, W_LEN, W_HGHT);
+	data->img.addr = mlx_get_data_addr(data->img.img_ptr, &data->img.bits_per_pixel, 
+		&data->img.line_length, &data->img.endian);
 	return (1);
 }
 
 int	main(int ac, char **av)
 {
 	t_scene	*scene;
-	t_mlx	*mlx;
+	t_data	*data;
 
 	scene = malloc(sizeof(t_scene));
 	if (!parsing(ac, av, scene))
 		return (1);
-	mlx = init_ui();
-	if (!mlx)
+	data = init_ui();
+	if (!data)
 		return (1);
-	init_img(mlx);
-	add_minimap(mlx);
-	mlx_put_image_to_window(mlx->ptr, mlx->window, mlx->img.img_ptr, 0, 0);
-	mlx_loop(mlx->ptr);
-	cleanup(mlx);
+	init_img(data);
+	add_minimap(data);
+	mlx_put_image_to_window(data->mlx_ptr, data->window, data->img.img_ptr, 0, 0);
+	mlx_loop(data->mlx_ptr);
+	cleanup(data);
 	free(scene);
 	return (0);
 }

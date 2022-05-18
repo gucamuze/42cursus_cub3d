@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 10:12:34 by malbrand          #+#    #+#             */
-/*   Updated: 2022/05/18 11:21:41 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/18 12:54:47 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ void	init_info(t_scene *scene)
 	{
 		j = 0;
 		while (j < 300)
-			scene->mlx.textures_paths[i][j++] = '\0';
+			scene->textures.paths[i][j++] = '\0';
 		i++;
 	}
-	scene->mlx.sky_color = -1;
-	scene->mlx.ground_color = -1;
+	scene->textures.sky_color = -1;
+	scene->textures.ground_color = -1;
 }
 
 static int	check_data(int line, t_scene *scene)
@@ -58,19 +58,19 @@ static int	check_data(int line, t_scene *scene)
 	i = 0;
 	if (line == 0)
 		return (0);
-	if (scene->mlx.textures_paths[0][0] == '\0'
-		&& scene->mlx.textures_paths[1][0] == '\0'
-		&& scene->mlx.textures_paths[2][0] == '\0'
-		&& scene->mlx.textures_paths[3][0] == '\0')
+	if (scene->textures.paths[0][0] == '\0'
+		&& scene->textures.paths[1][0] == '\0'
+		&& scene->textures.paths[2][0] == '\0'
+		&& scene->textures.paths[3][0] == '\0')
 		i++;
-	else if (scene->mlx.textures_paths[0][0] == '\0'
-			|| scene->mlx.textures_paths[1][0] == '\0'
-			|| scene->mlx.textures_paths[2][0] == '\0'
-			|| scene->mlx.textures_paths[3][0] == '\0')
+	else if (scene->textures.paths[0][0] == '\0'
+			|| scene->textures.paths[1][0] == '\0'
+			|| scene->textures.paths[2][0] == '\0'
+			|| scene->textures.paths[3][0] == '\0')
 		return (0);
-	if (scene->mlx.sky_color == -1 && scene->mlx.ground_color == -1)
+	if (scene->textures.sky_color == -1 && scene->textures.ground_color == -1)
 		i++;
-	else if (scene->mlx.sky_color == -1 || scene->mlx.ground_color == -1)
+	else if (scene->textures.sky_color == -1 || scene->textures.ground_color == -1)
 		return (0);
 	return (i + 1);
 }

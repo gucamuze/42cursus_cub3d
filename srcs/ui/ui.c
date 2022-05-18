@@ -6,30 +6,30 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:17:31 by gucamuze          #+#    #+#             */
-/*   Updated: 2022/05/17 15:44:30 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/18 12:50:01 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 // mode 0 if malloc failed, 1 if init failed, 2 if window failed
-void	*return_failure(t_mlx *mlx, int mode)
+void	*return_failure(t_data *data, int mode)
 {
 	(void)mode;
-	if (mlx->ptr)
+	if (data->mlx_ptr)
 	{
-		free(mlx->ptr);
+		free(data->mlx_ptr);
 	}
-	if (mlx->ptr)
+	if (data->mlx_ptr)
 	{
-		free(mlx->window);
+		free(data->window);
 	}
-	free(mlx);
+	free(data);
 	return (NULL);
 }
 
 // 0 for horizontal, 1 for vertical
-void	minimap_draw_line(t_mlx *mlx, int x, int y, int mode)
+void	minimap_draw_line(t_data *data, int x, int y, int mode)
 {
 	int	i;
 	int draw_x;
@@ -40,7 +40,7 @@ void	minimap_draw_line(t_mlx *mlx, int x, int y, int mode)
 	draw_y = MMAP_STRT + (y * 10);
 	while (i--)
 	{
-		my_mlx_pixel_put(&mlx->img, draw_x, draw_y, 0x00FFFFFF);
+		my_mlx_pixel_put(&data->img, draw_x, draw_y, 0x00FFFFFF);
 		if (mode)
 			draw_y++;
 		else
@@ -48,7 +48,7 @@ void	minimap_draw_line(t_mlx *mlx, int x, int y, int mode)
 	}
 }
 
-void	add_minimap(t_mlx *mlx)
+void	add_minimap(t_data *data)
 {
 	int	x;
 	int	y;
@@ -62,7 +62,6 @@ void	add_minimap(t_mlx *mlx)
 	};
 
 	y = 0;
-	(void)mlx;
 	while (map[y][0] != 0)
 	{
 		x = 0;
@@ -71,9 +70,9 @@ void	add_minimap(t_mlx *mlx)
 			if (map[y][x] == '1')
 			{
 				if (map[y][x + 1] && map[y][x + 1] == '1')
-					minimap_draw_line(mlx, x, y, 0);
+					minimap_draw_line(data, x, y, 0);
 				if (map[y + 1][x] && map[y + 1][x] == '1')
-					minimap_draw_line(mlx, x, y, 1);
+					minimap_draw_line(data, x, y, 1);
 				// printf("1");
 			}
 			x++;
@@ -82,26 +81,22 @@ void	add_minimap(t_mlx *mlx)
 	}
 }
 
-t_mlx	*init_ui()
+t_data	*init_ui()
 {
-	t_mlx	*mlx;
+	t_data	*data;
 
-	mlx = malloc(sizeof(t_mlx));
-	if (!mlx)
+	data = malloc(sizeof(t_data));
+	if (!data)
 		return (NULL);
-	// mlx->ptr = malloc(sizeof(void *));
-	// mlx->window = malloc(sizeof(void *));
-	// if (!mlx->ptr || !mlx->window)
-	// 	return (return_failure(mlx, 0));
-	mlx->ptr = mlx_init();
-	if (!mlx->ptr)
-		return (return_failure(mlx, 0));
-	mlx->window = mlx_new_window(mlx->ptr, W_LEN, W_HGHT, "cub3d");
-	mlx_key_hook(mlx->window, keyboard_hook, mlx);
-	// mlx_mouse_hide(mlx->ptr, mlx->window);
-	mlx_mouse_move(mlx->ptr, mlx->window, 960, 540);
-	mlx_mouse_hook(mlx->window, mouse_hook, mlx);
-	mlx_hook(mlx->window, 6, 1L<<6, mouse_move_hook, mlx);
-	mlx_hook(mlx->window, 17, 1L>>17, close_hook, mlx);
-	return (mlx);
+	data->mlx_ptr = mlx_init();
+	if (!data->mlx_ptr)
+		return (return_failure(data, 0));
+	data->window = mlx_new_window(data->mlx_ptr, W_LEN, W_HGHT, "cub3d");
+	mlx_key_hook(data->window, keyboard_hook, data);
+	// mlx_mouse_hide(data->mlx_ptr, data->window);
+	mlx_mouse_move(data->mlx_ptr, data->window, 960, 540);
+	mlx_mouse_hook(data->window, mouse_hook, data);
+	mlx_hook(data->window, 6, 1L<<6, mouse_move_hook, data);
+	mlx_hook(data->window, 17, 1L>>17, close_hook, data);
+	return (data);
 }

@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:28:58 by malbrand          #+#    #+#             */
-/*   Updated: 2022/05/18 11:21:44 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/18 12:55:54 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ static int	check_path(t_scene *scene, char *str, int i)
 {
 	int	fd;
 
-	if (scene->mlx.textures_paths[i][0] != '\0'
-		|| strcpy_path(str, scene->mlx.textures_paths[i]) == NULL)
+	if (scene->textures.paths[i][0] != '\0'
+		|| strcpy_path(str, scene->textures.paths[i]) == NULL)
 		return (0);
-	fd = open(scene->mlx.textures_paths[i], O_RDONLY);
+	fd = open(scene->textures.paths[i], O_RDONLY);
 	if (fd == -1)
 		return (0);
 	close(fd);
