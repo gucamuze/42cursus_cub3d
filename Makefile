@@ -6,7 +6,7 @@
 #    By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/15 02:21:09 by gucamuze          #+#    #+#              #
-#    Updated: 2022/05/18 11:28:48 by gucamuze         ###   ########.fr        #
+#    Updated: 2022/05/25 18:31:45 by gucamuze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,8 @@ SRC_FILES_PATH		=	./srcs/
 PARSING_FILES_PATH	=	./srcs/parsing/
 ENGINE_FILES_PATH	=	./srcs/engine/
 UI_FILES_PATH		=	./srcs/ui/
+PLAYER_FILES_PATH	=	./srcs/player/
+UTILS_FILES_PATH	=	./srcs/utils/
 
 LIBFT_PATH			=	./libft/
 LIBFT_A				=	./libft/libft.a
@@ -41,7 +43,17 @@ UI_PATH				=	$(addprefix ${UI_FILES_PATH}, ${UI_FILES})
 UI_OFILES			=	$(UI_PATH:.c=.o)
 ALL_OFILES			+=	$(UI_OFILES)
 			
-SRC_FILES			=	main.c cleanup.c
+UTILS_FILES			=	cleanup.c maths_utils.c
+UTILS_PATH			=	$(addprefix ${UTILS_FILES_PATH}, ${UTILS_FILES})
+UTILS_OFILES		=	$(UTILS_PATH:.c=.o)
+ALL_OFILES			+=	$(UTILS_OFILES)
+				
+PLAYER_FILES		=	movement.c
+PLAYER_PATH			=	$(addprefix ${PLAYER_FILES_PATH}, ${PLAYER_FILES})
+PLAYER_OFILES		=	$(PLAYER_PATH:.c=.o)
+ALL_OFILES			+=	$(PLAYER_OFILES)
+			
+SRC_FILES			=	main.c
 SRC_PATH			=	$(addprefix ${SRC_FILES_PATH}, ${SRC_FILES})
 SRC_OFILES			=	$(SRC_PATH:.c=.o)
 ALL_OFILES			+=	$(SRC_OFILES)
@@ -60,7 +72,7 @@ $(LIBFT_A):
 $(MINILIBX_A):
 				make --directory=minilibx-linux
 
-OFILES:			${SRC_OFILES} ${ENGINE_OFILES} ${UI_OFILES} ${PARSING_OFILES}
+OFILES:			${SRC_OFILES} ${ENGINE_OFILES} ${UI_OFILES} ${PARSING_OFILES} ${PLAYER_OFILES} ${UTILS_OFILES}
 				
 noflags:		CC = clang -g
 noflags:		all

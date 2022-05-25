@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 12:31:19 by malbrand          #+#    #+#             */
-/*   Updated: 2022/05/18 11:21:22 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/25 20:00:31 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ static void	fill_info(t_scene *scene, char *str, int i, int j)
 	scene->map.map[i][j] = 2;
 	if (str[j] == 'N')
 		scene->map.hero = 0;
-	else if (str[j] == 'S')
+	else if (str[j] == 'W')
 		scene->map.hero = 1;
-	else if (str[j] == 'E')
+	else if (str[j] == 'S')
 		scene->map.hero = 2;
 	else
 		scene->map.hero = 3;

@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 10:10:33 by malbrand          #+#    #+#             */
-/*   Updated: 2022/05/18 13:02:17 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/25 18:27:33 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_scene
 	t_textures	textures;
 	t_map		map;
 }			t_scene;
+
 
 int		len_ret(char *s);
 int		fill_path(char *str, t_scene *scene);

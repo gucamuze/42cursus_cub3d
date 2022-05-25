@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 18:59:47 by gucamuze          #+#    #+#             */
-/*   Updated: 2022/05/18 12:50:20 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/25 20:59:22 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	keyboard_hook(int keycode, t_data *data)
 {
-	(void)data;
 	if (keycode == 65307)
 	{
 		cleanup(data);
@@ -23,6 +22,7 @@ int	keyboard_hook(int keycode, t_data *data)
 	if (keycode == 119 || keycode == 97 || keycode == 100 || keycode == 115)
 	{
 		printf("wasd => movement\n");
+		move_player(data, keycode);
 	}
 	printf("Hello from key_hook!\nkeycode = %d\n", keycode);
 	return (1);

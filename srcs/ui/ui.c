@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:17:31 by gucamuze          #+#    #+#             */
-/*   Updated: 2022/05/18 14:23:32 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/25 21:12:35 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ void	minimap_draw(t_data *data, int x, int y, int mode)
 		while (j++ < size_of_walls)
 		{
 			if (mode == 0)
-				my_mlx_pixel_put(&data->img, draw_x + i, draw_y + j, 0x00FFFFFF);
+				my_mlx_pixel_put(&data->img, draw_x + i, draw_y + j, 0x80FFFFFF);
 			else
-				my_mlx_pixel_put(&data->img, draw_x + i, draw_y + j, 0x00FFFF00);
+				my_mlx_pixel_put(&data->img, draw_x + i, draw_y + j, 0x80FFFF00);
 		}
 	}
 }
 
-void	add_minimap(t_data *data)
+int	add_minimap(t_data *data)
 {
 	int	x;
 	int	y;
@@ -69,12 +69,13 @@ void	add_minimap(t_data *data)
 		{
 			if (map[y][x] == 1)
 				minimap_draw(data, x, y, 0);
-			else if (map[y][x] == 2)
+			if (map[y][x] == 2)
 				minimap_draw(data, x, y, 1);
 			x++;
 		}
 		y++;
 	}
+	return (1);
 }
 
 t_data	*init_ui()

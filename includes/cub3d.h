@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:19:08 by gucamuze          #+#    #+#             */
-/*   Updated: 2022/05/18 13:44:11 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/05/25 21:11:06 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,27 @@ typedef struct	s_img {
 	int		endian;
 }				t_img;
 
+typedef struct s_player
+{
+	int 	posX;
+	int		posY;
+	float	fov_rad;
+}				t_player;
+
 typedef struct s_data
 {
-	void	*mlx_ptr;
-	void	*window;
-	t_img	img;
-	t_scene	*scene;
+	void		*mlx_ptr;
+	void		*window;
+	t_img		img;
+	t_scene		*scene;
+	t_player	player;
 }				t_data;
 
 // UI START //
 // ui
 void			*init_failure(t_data *mlx, int mode);
 t_data			*init_ui();
-void			add_minimap(t_data *mlx);
+int				add_minimap(t_data *mlx);
 // hooks
 int				keyboard_hook(int keycode, t_data *mlx);
 int				mouse_hook(int button, int x, int y, t_data *mlx);
@@ -62,10 +70,14 @@ int				get_g(int trgb);
 int				get_b(int trgb);
 // ENGINE END //
 
+// PLAYER START //
+void			move_player(t_data *data, int keycode);
+// PLAYER END //
+
 // TBD START //
 // cleanup
 void			cleanup(t_data *mlx);
-
+void			__DEBUG_map_dump(t_data *data);
 // TBD END //
 
 // GNL
