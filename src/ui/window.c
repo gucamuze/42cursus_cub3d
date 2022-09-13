@@ -1,0 +1,34 @@
+#include "cube.h"
+
+// Enum for all mlx supported event are in the cube_ui.h header file
+static void	init_event_hooks(t_prog *prog)
+{
+	t_mlx	*mlx;
+
+	mlx = prog->mlx;
+	mlx_key_hook(mlx->win, key_hook, prog);
+	mlx_mouse_hook(mlx->win, mouse_click_hook, prog);
+	mlx_hook(mlx->win, ON_DESTROY, 0, end_mlx_loop, prog);
+	mlx_do_key_autorepeaton(mlx->ptr);
+	// mlx_hook(mlx->win, 6, 1L<<6, mouse_move_hook, prog);
+}
+
+int	init_ui(t_prog *prog)
+{
+	t_mlx	*mlx;
+
+	mlx = malloc(sizeof(t_mlx));
+	if (!mlx)
+		return (0);
+	prog->display_minimap = true;
+	mlx->ptr = mlx_init();
+	if (!mlx->ptr)
+		return (0);
+	mlx->win = mlx_new_window(mlx->ptr, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3d");
+	mlx->img = malloc(sizeof(t_img));
+	if (!mlx->img)
+		return (0);
+	prog->mlx = mlx;
+	init_event_hooks(prog);
+	return (1);
+}

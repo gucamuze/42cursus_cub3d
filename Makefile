@@ -1,100 +1,63 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/07/15 02:21:09 by gucamuze          #+#    #+#              #
-#    Updated: 2022/05/25 18:31:45 by gucamuze         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+CC = clang
+FLAGS = -Wall -Wextra -Werror -g
+SRC =   src/cube3d.c \
+        src/parsing/floor/read_floor.c \
+        src/parsing/textures/read_textures.c \
+        src/parsing/textures/init_textures.c \
+        src/parsing/ceiling/read_ceiling.c \
+        src/parsing/map/read_map.c \
+		src/parsing/map/valid_map.c \
+		src/parsing/map/valid_map_2.c \
+        lib/get_next_line/get_next_line.c \
+        lib/get_next_line/get_next_line_utils.c \
+        src/parsing/map/init_map.c \
+		src/free/free_prog.c \
+		src/free/free_floor.c \
+		src/free/free_ceiling.c \
+		src/free/free_map.c \
+        src/free/free_char.c \
+        src/free/free_textures.c \
+        src/free/free_mlx.c \
+		src/ui/window.c \
+		src/ui/minimap.c \
+		src/ui/hooks.c \
+		src/engine/colors.c \
+		src/engine/game.c \
+		src/engine/mlx_utils.c \
+		src/engine/maths_functions.c \
+		src/engine/player_moves.c \
 
+OBJ = ${SRC:.c=.o}
+LIBFT_DIR = lib/libft/
+LIBFT = ${LIBFT_DIR}libft.a
+NAME = cube3d
+RM = rm -f
 
-EXEC_NAME			=	cub3d
-CC					=	clang -Wall -Wextra -Werror -g
-RM					=	rm -f
+.c.o: cube3d
+	${CC} ${FLAGS} -c -I./includes -I./lib/get_next_line -I./lib/libft -I./minilibx $< -o ${<:.c=.o}
 
-SRC_FILES_PATH		=	./srcs/
-PARSING_FILES_PATH	=	./srcs/parsing/
-ENGINE_FILES_PATH	=	./srcs/engine/
-UI_FILES_PATH		=	./srcs/ui/
-PLAYER_FILES_PATH	=	./srcs/player/
-UTILS_FILES_PATH	=	./srcs/utils/
+all: ${NAME}
 
-LIBFT_PATH			=	./libft/
-LIBFT_A				=	./libft/libft.a
-MINILIBX_A			=	./minilibx-linux/libmlx_Linux.a
-INCLUDES			=	 -Iminilibx-linux -Lminilibx-linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz $(LIBFT_A)
-			
-PARSING_FILES		=	parsing.c color.c create_map.c error_map.c loop_info.c map.c \
-						path_textures.c gnl.c gnl_utils.c fill_map.c 
-PARSING_PATH		=	$(addprefix ${PARSING_FILES_PATH}, ${PARSING_FILES})
-PARSING_OFILES		=	$(PARSING_PATH:.c=.o)
-ALL_OFILES			+=	$(PARSING_OFILES)
+$(LIBFT):
+	$(MAKE) -s -C $(LIBFT_DIR)
+	@echo -ne "\\r${CHECK_MARK} $(NAME): $(GREEN)$(LIBFT) created !     $(RESET)"
 
-ENGINE_FILES		=	engine.c colors.c
-ENGINE_PATH			=	$(addprefix ${ENGINE_FILES_PATH}, ${ENGINE_FILES})
-ENGINE_OFILES		=	$(ENGINE_PATH:.c=.o)
-ALL_OFILES			+=	$(ENGINE_OFILES)					
-				
-UI_FILES			=	ui.c hooks.c
-UI_PATH				=	$(addprefix ${UI_FILES_PATH}, ${UI_FILES})
-UI_OFILES			=	$(UI_PATH:.c=.o)
-ALL_OFILES			+=	$(UI_OFILES)
-			
-UTILS_FILES			=	cleanup.c maths_utils.c
-UTILS_PATH			=	$(addprefix ${UTILS_FILES_PATH}, ${UTILS_FILES})
-UTILS_OFILES		=	$(UTILS_PATH:.c=.o)
-ALL_OFILES			+=	$(UTILS_OFILES)
-				
-PLAYER_FILES		=	movement.c
-PLAYER_PATH			=	$(addprefix ${PLAYER_FILES_PATH}, ${PLAYER_FILES})
-PLAYER_OFILES		=	$(PLAYER_PATH:.c=.o)
-ALL_OFILES			+=	$(PLAYER_OFILES)
-			
-SRC_FILES			=	main.c
-SRC_PATH			=	$(addprefix ${SRC_FILES_PATH}, ${SRC_FILES})
-SRC_OFILES			=	$(SRC_PATH:.c=.o)
-ALL_OFILES			+=	$(SRC_OFILES)
+${NAME}: ${OBJ} minilibx/libmlx_Linux.a $(LIBFT)
+	${CC} ${FLAGS} ${OBJ} ./minilibx/libmlx_Linux.a -lXext -lX11 -I./lib/get_next_line/ -I./minilibx/include/ -I./includes/ -o ${NAME} -L$(LIBFT_DIR) -lft
 
-%.o:%.c
-				$(CC) -Iincludes -Iminilibx-linux -c $< -o $@
+clean_libft:
+	@echo -n "$(NAME): $(GREEN)cleaning $(LIBFT)...$(RESET)"
+	$(RM) $(LIBFT)
+	@echo -ne "\\r${CHECK_MARK} $(NAME): $(GREEN)$(LIBFT) cleaned !     $(RESET)"
 
-all:			${EXEC_NAME}
+clean: clean_libft
+	${RM} ${OBJ}
+	$(MAKE) clean -s -C ./minilibx
 
-$(EXEC_NAME):	$(LIBFT_A) $(MINILIBX_A) OFILES
-				$(CC) $(ALL_OFILES) $(INCLUDES) -o $(EXEC_NAME)
+fclean: clean clean_libft
+	${RM} ${NAME}
 
-$(LIBFT_A):
-				make --directory=libft
+re: fclean all
 
-$(MINILIBX_A):
-				make --directory=minilibx-linux
-
-OFILES:			${SRC_OFILES} ${ENGINE_OFILES} ${UI_OFILES} ${PARSING_OFILES} ${PLAYER_OFILES} ${UTILS_OFILES}
-				
-noflags:		CC = clang -g
-noflags:		all
-
-fsanitize:		CC = clang -Wall -Wextra -Werror -fsanitize=address -g
-fsanitize:		all
-				
-clean:
-				make clean --directory=libft
-				make clean --directory=minilibx-linux
-				$(RM) $(ALL_OFILES)
-
-fclean:		clean
-				$(RM) $(LIBFT_A) $(MINILIBX_A) ${EXEC_NAME}
-
-re:			fclean all
-
-norminette:
-			norminette srcs libft includes
-
-bonus:
-			@google-chrome-stable --new-window https://youtu.be/dQw4w9WgXcQ\?t\=42	
-
-.PHONY:	all clean fclean re norminette
-
+minilibx/libmlx_Linux.a:
+	make -C ./minilibx
