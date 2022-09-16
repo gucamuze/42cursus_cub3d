@@ -34,8 +34,6 @@ void set_player_movement(t_prog *prog, int keycode)
 int	key_hook(int keycode, t_prog *prog)
 {
 	(void)prog;
-	// w=>119, a=>97, s=>115, d=>100, space=32, esc=>65307,
-	// tab=>65289, left=>65361, right=>65363
 	printf("Hello from keycode %d\n", keycode);
 	if (keycode == ESC_KEY)
 		end_mlx_loop(prog);

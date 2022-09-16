@@ -55,9 +55,9 @@ enum {
 // Custom defines
 # define SCREEN_WIDTH 800
 # define SCREEN_HEIGHT 600
-# define TILE_SIZE 10
-# define MINIMAP_SIZE_RATIO 0.1
-# define MINIMAP_OFFSET 50 // in pixels
+# define TILE_SIZE 5
+# define MINIMAP_SIZE_RATIO 0.05
+# define MINIMAP_OFFSET 20 // in pixels
 # define TPF 33
 # define PLAYER_SIZE 2
 # define PLAYER_MOVESPEED 0.1
