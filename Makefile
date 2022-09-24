@@ -23,6 +23,7 @@ SRC =   src/cube3d.c \
 		src/ui/hooks.c \
 		src/engine/colors.c \
 		src/engine/game.c \
+		src/engine/draw.c \
 		src/engine/mlx_utils.c \
 		src/engine/maths_functions.c \
 		src/engine/player_moves.c \
@@ -43,7 +44,7 @@ $(LIBFT):
 	@echo -ne "\\r${CHECK_MARK} $(NAME): $(GREEN)$(LIBFT) created !     $(RESET)"
 
 ${NAME}: ${OBJ} minilibx/libmlx_Linux.a $(LIBFT)
-	${CC} ${FLAGS} ${OBJ} ./minilibx/libmlx_Linux.a -lXext -lX11 -I./lib/get_next_line/ -I./minilibx/include/ -I./includes/ -o ${NAME} -L$(LIBFT_DIR) -lft
+	${CC} ${FLAGS} ${OBJ} ./minilibx/libmlx_Linux.a -lXext -lm -lX11 -I./lib/get_next_line/ -I./minilibx/include/ -I./includes/ -o ${NAME} -L$(LIBFT_DIR) -lft
 
 clean_libft:
 	@echo -n "$(NAME): $(GREEN)cleaning $(LIBFT)...$(RESET)"

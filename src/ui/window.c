@@ -1,5 +1,16 @@
 #include "cube.h"
 
+int down(int keycode)
+{
+	printf("down keycode %d\n", keycode);
+	return 0;
+}
+int up(int keycode)
+{
+	printf("up keycode %d\n", keycode);
+	return 0;
+}
+
 // Enum for all mlx supported event are in the cube_ui.h header file
 static void	init_event_hooks(t_prog *prog)
 {

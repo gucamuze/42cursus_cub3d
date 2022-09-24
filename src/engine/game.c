@@ -60,9 +60,14 @@ int	render_next_frame(t_prog *prog)
 void	game_loop(t_prog *prog)
 {
 	t_mlx	*mlx;
+	t_point test;
+
+	test.x = 700;
+	test.y = 500;
 
 	mlx = prog->mlx;
 	prep_img(mlx);
+	draw_line(prog->mlx->img, prog->player->pos, test);
 	mlx_loop_hook(mlx->ptr, render_next_frame, prog);
 	mlx_loop(mlx->ptr);
 }
