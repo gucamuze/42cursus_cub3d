@@ -16,34 +16,49 @@ void set_minimap_display(t_prog *prog)
 		prog->display_minimap = false;
 }
 
-void set_player_movement(t_prog *prog, int keycode)
+void set_player_movement(t_prog *prog, int keycode, bool set)
 {
-	__uint8_t	*moves;
-
-	moves = &prog->player->moves;
-	if (keycode == W_KEY)
-		*moves |= FORWARD;
-	else if (keycode == S_KEY)
-		*moves |= BACKWARDS;
-	else if (keycode == A_KEY)
-		*moves |= LEFT;
-	else if (keycode == D_KEY)
-		*moves |= RIGHT;
+	if (set == true)
+	{
+		if (keycode == W_KEY)
+			prog->player->move_forward += 1;
+		else if (keycode == S_KEY)
+			prog->player->move_forward -= 1;
+		else if (keycode == A_KEY)
+			prog->player->move_lateral -= 1;
+		else if (keycode == D_KEY)
+			prog->player->move_lateral += 1;
+	}
+	else
+	{
+		if (keycode == W_KEY || keycode == S_KEY)
+			prog->player->move_forward = 0;
+		else if (keycode == A_KEY || keycode == D_KEY)
+			prog->player->move_lateral = 0;
+	}
 }
 
-int	key_hook(int keycode, t_prog *prog)
+int	keydown_hook(int keycode, t_prog *prog)
 {
-	(void)prog;
-	// w=>119, a=>97, s=>115, d=>100, space=32, esc=>65307,
-	// tab=>65289, left=>65361, right=>65363
-	printf("Hello from keycode %d\n", keycode);
+	printf("Hello from keydown %d\n", keycode);
+	if (keycode == W_KEY || keycode == A_KEY
+			|| keycode == S_KEY || keycode == D_KEY)
+		set_player_movement(prog, keycode, true); // player moves
+	else if (keycode == LEFT_KEY || keycode == RIGHT_KEY)
+		; // camera rotation
+	return (0);
+}
+
+int keyup_hook(int keycode, t_prog *prog)
+{
+	printf("Hello from keyup %d\n", keycode);
 	if (keycode == ESC_KEY)
 		end_mlx_loop(prog);
 	else if (keycode == TAB_KEY)
 		set_minimap_display(prog);//tab
-	else if (keycode == W_KEY || keycode == A_KEY
+	if (keycode == W_KEY || keycode == A_KEY
 			|| keycode == S_KEY || keycode == D_KEY)
-		set_player_movement(prog, keycode); // player moves
+		set_player_movement(prog, keycode, false); // player moves
 	else if (keycode == LEFT_KEY || keycode == RIGHT_KEY)
 		; // camera rotation
 	return (0);

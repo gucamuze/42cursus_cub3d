@@ -15,27 +15,24 @@ static void	prep_img(t_mlx *mlx)
 void update_player(t_prog *prog)
 {
 	t_point		*player_pos;
-	__uint8_t	*moves;
 
 	player_pos = &prog->player->pos;
-	moves = &prog->player->moves;
-	if (*moves & FORWARD)
+	if (prog->player->move_forward == 1)
 	{
 		player_pos->y -= PLAYER_MOVESPEED;
 	}
-	if (*moves & BACKWARDS)
+	if (prog->player->move_forward == -1)
 	{
 		player_pos->y += PLAYER_MOVESPEED;
 	}
-	if (*moves & LEFT)
+	if (prog->player->move_lateral == 1)
 	{
 		player_pos->x -= PLAYER_MOVESPEED;
 	}
-	if (*moves & RIGHT)
+	if (prog->player->move_lateral == -1)
 	{
 		player_pos->x += PLAYER_MOVESPEED;
 	}
-	*moves = 0;
 }
 
 void	debug_print_player(t_point pos)

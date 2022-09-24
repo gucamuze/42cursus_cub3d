@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 12:57:04 by recarlie          #+#    #+#             */
-/*   Updated: 2022/09/14 01:16:42 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/09/24 23:19:27 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_map	*init_map(t_prog *prog)
 	prog->player->pos.x = -1;
 	prog->player->pos.y = -1;
 	prog->player->dir = NA;
-	prog->player->moves = 0;
+	prog->player->move_forward = 0;
+	prog->player->move_lateral = 0;
 	return (map);
 }

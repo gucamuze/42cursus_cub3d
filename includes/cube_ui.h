@@ -16,7 +16,8 @@ typedef struct s_mlx {
 int		init_ui(t_prog *prog);
 // HOOKS
 int		end_mlx_loop(t_prog *prog);
-int		key_hook(int keycode, t_prog *prog);
+int		keydown_hook(int keycode, t_prog *prog);
+int		keyup_hook(int keycode, t_prog *prog);
 int		mouse_click_hook(int button, int x, int y, t_prog *prog);
 int		mouse_move_hook(int x, int y, t_prog *prog);
 // MINIMAP
