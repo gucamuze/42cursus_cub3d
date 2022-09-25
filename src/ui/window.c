@@ -31,7 +31,7 @@ int	init_ui(t_prog *prog)
 	mlx = malloc(sizeof(t_mlx));
 	if (!mlx)
 		return (0);
-	prog->display_minimap = true;
+	prog->display_minimap = false;
 	mlx->ptr = mlx_init();
 	if (!mlx->ptr)
 		return (0);

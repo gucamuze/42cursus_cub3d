@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 14:32:18 by recarlie          #+#    #+#             */
-/*   Updated: 2022/08/27 17:36:58 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/09/25 22:15:05 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,16 @@ int	set_player(t_prog *prog, int y, int x, char dir)
 	if (prog->player->pos.x != -1)
 		return (0);
 	prog->map->data[y][x] = 'P';
-	prog->player->pos.x = x;
-	prog->player->pos.y = y;
-	prog->player->dir = dir;
+	prog->player->pos.x = x * TILE_SIZE;
+	prog->player->pos.y = y * TILE_SIZE;
+	if (dir == 'E')
+		prog->player->player_view_angle = 0;
+	else if (dir == 'N')
+		prog->player->player_view_angle = 90;
+	else if (dir == 'W')
+		prog->player->player_view_angle = 180;
+	else if (dir == 'S')
+		prog->player->player_view_angle = 270;
 	return (1);
 }
 

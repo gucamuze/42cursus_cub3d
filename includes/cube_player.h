@@ -9,10 +9,10 @@ typedef struct s_point	t_point;
 // move lateral -> 1 right, -1 left, 0 neither
 typedef struct s_player {
 	t_point			pos;
-	char			dir; // TODO: convert right away to rad value
-	float			pov_rad;
+	float			player_view_angle;
 	int				move_forward;
 	int				move_lateral;
+	int				turn_direction;
 }   t_player;
 
 #endif

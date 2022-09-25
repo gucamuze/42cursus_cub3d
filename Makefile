@@ -1,5 +1,5 @@
 CC = clang
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 SRC =   src/cube3d.c \
         src/parsing/floor/read_floor.c \
         src/parsing/textures/read_textures.c \
@@ -24,6 +24,7 @@ SRC =   src/cube3d.c \
 		src/engine/colors.c \
 		src/engine/game.c \
 		src/engine/draw.c \
+		src/engine/renderer.c \
 		src/engine/mlx_utils.c \
 		src/engine/maths_functions.c \
 		src/engine/player_moves.c \

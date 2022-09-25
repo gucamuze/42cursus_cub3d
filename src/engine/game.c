@@ -27,11 +27,11 @@ void update_player(t_prog *prog)
 	}
 	if (prog->player->move_lateral == 1)
 	{
-		player_pos->x -= PLAYER_MOVESPEED;
+		player_pos->x += PLAYER_MOVESPEED;
 	}
 	if (prog->player->move_lateral == -1)
 	{
-		player_pos->x += PLAYER_MOVESPEED;
+		player_pos->x -= PLAYER_MOVESPEED;
 	}
 }
 
@@ -49,8 +49,9 @@ int	render_next_frame(t_prog *prog)
 	img = mlx->img;
 	update_player(prog);
 	// debug_print_player(prog->player->pos);
-	if (prog->display_minimap == true)
-		draw_minimap(prog);
+	// if (prog->display_minimap == true)
+	// 	draw_minimap(prog);
+	render(prog, prog->player);
 	mlx_put_image_to_window(mlx->ptr, mlx->win, img->ptr, 0, 0);
 	return (1);
 }
@@ -67,7 +68,7 @@ void	game_loop(t_prog *prog)
 
 	mlx = prog->mlx;
 	prep_img(mlx);
-	draw_line(prog->mlx->img, prog->player->pos, test);
+	// draw_line(prog->mlx->img, prog->player->pos, test);
 	mlx_loop_hook(mlx->ptr, render_next_frame, prog);
 	mlx_loop(mlx->ptr);
 }

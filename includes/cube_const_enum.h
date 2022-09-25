@@ -55,13 +55,16 @@ enum {
 // Custom defines
 # define SCREEN_WIDTH 800
 # define SCREEN_HEIGHT 600
-# define TILE_SIZE 5
+# define TILE_SIZE 64
 # define MINIMAP_SIZE_RATIO 0.05
 # define MINIMAP_OFFSET 20 // in pixels
 # define TPF 33
 # define PLAYER_SIZE 2
-# define PLAYER_MOVESPEED 0.1
+# define PLAYER_HEIGHT 32
+# define PLAYER_MOVESPEED 0.005
 # define FOV_ANGLE 60
-# define FOV_RAD FOV_ANGLE * PI_DIV
+# define HALF_FOV_ANGLE (FOV_ANGLE / 2)
+# define DEGREE_PER_RAY (FOV_ANGLE / SCREEN_WIDTH)
+# define DIST_FROM_PPLANE (SCREEN_WIDTH / tan(FOV_ANGLE / 2))
 
 #endif
