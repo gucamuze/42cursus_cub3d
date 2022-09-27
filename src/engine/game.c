@@ -35,11 +35,6 @@ void update_player(t_prog *prog)
 	}
 }
 
-void	debug_print_player(t_point pos)
-{
-	printf("player x:%f\tplayer y: %f\n", pos.x, pos.y);
-}
-
 int	render_next_frame(t_prog *prog)
 {
 	t_mlx	*mlx;

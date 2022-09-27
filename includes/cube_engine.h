@@ -12,9 +12,15 @@ typedef struct s_img {
 }	t_img;
 
 typedef struct s_point {
-	float	x;
-	float	y;
+	int		x;
+	int		y;
 }	t_point;
+
+typedef struct s_ray {
+	t_point	horizontal_hit;
+	t_point	vertical_hit;
+	float	closestDist;
+}	t_ray;
 
 void	game_loop(t_prog *prog);
 // colors
@@ -28,7 +34,7 @@ void	render(t_prog *prog, t_player *player);
 // maths_functions
 float	degrees_to_radians(float degree);
 float	radians_to_degrees(float radians);
-float	get_vector_magnitude(t_point a, t_point b);
+float	get_hypothenuse_len(t_point a, t_point b);
 // player_moves
 void    player_move_forward(t_prog *prog);
 

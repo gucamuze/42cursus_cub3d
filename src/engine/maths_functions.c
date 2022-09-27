@@ -10,13 +10,12 @@ float	radians_to_degrees(float radians)
 	return (radians * DIV_PI);
 }
 
-float	get_vector_magnitude(t_point a, t_point b)
+float	get_hypothenuse_len(t_point a, t_point b)
 {
-	float x;
-	float y;
+	int x;
+	int y;
 
-	x = fabs(a.x - b.x);
-	y = fabs(a.y - b.y);
-	printf("x = %f, y = %f\n", x, y);
+	x = abs(a.x - b.x);
+	y = abs(a.y - b.y);
 	return (sqrt(x * x + y * y));
 }
