@@ -41,6 +41,7 @@ int	render_next_frame(t_prog *prog)
 	t_img	*img;
 
 	mlx = prog->mlx;
+	prep_img(mlx);
 	img = mlx->img;
 	update_player(prog);
 	// debug_print_player(prog->player->pos);
@@ -48,6 +49,7 @@ int	render_next_frame(t_prog *prog)
 	// 	draw_minimap(prog);
 	render(prog, prog->player);
 	mlx_put_image_to_window(mlx->ptr, mlx->win, img->ptr, 0, 0);
+	mlx_destroy_image(mlx->ptr, img->ptr);
 	return (1);
 }
 
@@ -56,10 +58,6 @@ int	render_next_frame(t_prog *prog)
 void	game_loop(t_prog *prog)
 {
 	t_mlx	*mlx;
-	t_point test;
-
-	test.x = 700;
-	test.y = 500;
 
 	mlx = prog->mlx;
 	prep_img(mlx);

@@ -58,13 +58,12 @@ enum {
 # define TILE_SIZE 64
 # define MINIMAP_SIZE_RATIO 0.05
 # define MINIMAP_OFFSET 20 // in pixels
-# define TPF 33
 # define PLAYER_SIZE 2
 # define PLAYER_HEIGHT 32
-# define PLAYER_MOVESPEED 0.005
+# define PLAYER_MOVESPEED 2
 # define FOV_ANGLE 60
 # define HALF_FOV_ANGLE (FOV_ANGLE / 2)
 # define DEGREE_PER_RAY (FOV_ANGLE / SCREEN_WIDTH)
-# define DIST_FROM_PPLANE (SCREEN_WIDTH / tan(FOV_ANGLE / 2))
+# define DIST_FROM_PPLANE (SCREEN_WIDTH / tan(HALF_FOV_ANGLE * PI_DIV))
 
 #endif

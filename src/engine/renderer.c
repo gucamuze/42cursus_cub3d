@@ -73,11 +73,12 @@ void	draw_ray(t_prog *prog, t_ray *ray, int ray_n)
 	int		proj_height;
 	int		draw_y;
 
-	proj_height = (ray->closestDist * SCREEN_WIDTH) / (SCREEN_WIDTH >> 1);
+	// proj_height = (ray->closestDist * SCREEN_WIDTH) / (SCREEN_WIDTH >> 1);
+	proj_height = TILE_SIZE / ray->closestDist * DIST_FROM_PPLANE;
 	if (proj_height>800)
 		proj_height = 800;
 	draw_y = (int)(SCREEN_WIDTH - proj_height) >> 1;
-	printf("wall %f units awat height in pixels %d\n", ray->closestDist, proj_height);
+	// printf("wall %f units awat height in pixels %d\n", ray->closestDist, proj_height);
 	while (proj_height--)
 	{
 		my_mlx_pixel_put(prog->mlx->img, ray_n, draw_y, 0xFFFFFF);
@@ -108,7 +109,7 @@ void	render(t_prog *prog, t_player *player)
 		// calc closest wall
 		calc_closest_wall(player->pos, &rays[ray_n]);
 		// increment angle and continue
-		printf("done casting ray %d, closest wall is %f units away\n", ray_n, rays[ray_n].closestDist);
+		// printf("done casting ray %d, closest wall is %f units away\n", ray_n, rays[ray_n].closestDist);
 		draw_ray(prog, &rays[ray_n], ray_n);
 		ray_angle -= degree_per_ray;
 		if (ray_angle < 0)

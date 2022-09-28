@@ -1,5 +1,5 @@
 CC = clang
-FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -fsanitize=address
 SRC =   src/cube3d.c \
         src/parsing/floor/read_floor.c \
         src/parsing/textures/read_textures.c \
